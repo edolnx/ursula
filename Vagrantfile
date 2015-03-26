@@ -10,7 +10,11 @@ NUM_SWIFT_NODES = ENV['URSULA_NUM_SWIFT_NODES'] || 3
 BOX_URL = ENV['URSULA_BOX_URL'] || 'http://apt.openstack.blueboxgrid.com/vagrant/ursula-precise.box'
 BOX_NAME = ENV['URSULA_BOX_NAME'] || 'ursula-precise'
 
-SETTINGS_FILE = ENV['SETTINGS_FILE'] || 'vagrant.yml'
+if File.file?('.vagrant/vagrant.yml')
+  SETTINGS_FILE = ENV['SETTINGS_FILE'] || '.vagrant/vagrant.yml'
+else
+  SETTINGS_FILE = ENV['SETTINGS_FILE'] || 'vagrant.yml'
+end
 
 SETTINGS = YAML.load_file SETTINGS_FILE
 
